@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+
+
+{% block title %}Home{% endblock title %}
+
+{% block js %}
+<script>
+  let previews = document.getElementsByClassName('preview')
+  Array.from(previews).forEach((element) => {
+    element.innerHTML = element.innerText
+  })
+</script>
+
+{% endblock js %}
+
+{% block homeactive %}active{% endblock homeactive %}
+
+{% block body %}
+<div class="container my-4" style="text-align: center;">
+  <div class="jumbotron" style="background-color:hsla(155, 71%, 74%, 0.966)">
+    <h1 class="display-4">Welcome to Tab Coders</h1>
+    <p class="lead">A place to clear all your doubts related to coding and polish yout skills.</p>
+    <hr class="my-4">
+    <p>Explore your ideas and get guidance from Tech Freaks.Learn Coding to start loving it.</p>
+    <p class="lead">
+      <a class="btn btn-primary btn-lg" href="/about" role="button">Community</a>
+    </p>
+  </div>
+</div>
+
+<!-- posts -->
+
+<div class="container">
+  <h1>Popular Blogs:</h1>
+
+  {% for post in homePosts %}
+
+  <div class="row g-0 border rounded overflow-hidden flex-md-row my-10 shadow-sm h-md-250 position-relative">
+    <div class="col p-4 d-flex flex-column position-static">
+      <strong class="d-inline-block mb-2 text-primary">Article By: {{post.author}}</strong>
+      <h3 class="mb-0">{{post.title}}</h3>
+      <div class="mb-1 text-muted">{{post.datetime}}</div>
+      <p class="card-text mb-auto"><div class="preview">{{post.content |safe| truncatechars:450}}</div></p>
+      <div class="my-2"><a href="/blog/{{post.slug}}" role="button" class="btn btn-primary">Continue reading</a></div>
+      <div class="col-auto d-none d-lg-block"></div>
+    </div>
+  </div>
+
+  {% endfor %}
+
+</div>
+
+{% endblock body %}
